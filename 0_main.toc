@@ -1,0 +1,73 @@
+\babel@toc {russian}{}\relax 
+\contentsline {chapter}{Введение}{5}{chapter*.2}%
+\contentsline {chapter}{\chapternumberline {1}Лабораторная работа №1. Huawei VRP и основы конфигурирования}{6}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Цели}{6}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Топология сети}{6}{section.1.2}%
+\contentsline {section}{\numberline {1.3}План работы}{6}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Процедура конфигурирования}{7}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Вопросы}{10}{section.1.5}%
+\contentsline {chapter}{\chapternumberline {2}Лабораторная работа №2. Создание взаимосвязанной IP-сети}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}\textit {Лабораторная работа №2.1. Адресация и маршрутизация IPv4}}{11}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Цели}{11}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Топология сети}{11}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}План работы}{11}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Процедура конфигурирования}{12}{subsection.2.1.4}%
+\contentsline {section}{\numberline {2.2}Вопросы}{19}{section.2.2}%
+\contentsline {section}{\numberline {2.3}\textit {Лабораторная работа №2.2. Адресация и маршрутизация IPv4}}{20}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Цели}{20}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Топология сети}{21}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}План работы}{21}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Процедура конфигурирования}{21}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Вопросы.}{27}{section.2.4}%
+\contentsline {chapter}{\chapternumberline {3}Лабораторная работа №3. Создание коммутируемой сети Ethernet.}{29}{chapter.3}%
+\contentsline {section}{\numberline {3.1}\textit {Лабораторная работа №3.1.Основы Ethernet и конфигурирование VLAN}}{29}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Цели}{29}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Топология сети}{29}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}План работы}{30}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Процедура конфигурирования}{30}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Вопросы.}{36}{subsection.3.1.5}%
+\contentsline {section}{\numberline {3.2}\textit {Лабораторная работа №3.2. Протокол связующего дерева (STP)}}{36}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Цели}{36}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Топология сети}{36}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}План работы}{37}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Процедура конфигурирования}{37}{subsection.3.2.4}%
+\contentsline {section}{\numberline {3.3}\textit {Лабораторная работа №3.3. Агрегирование каналов Ethernet.}}{42}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Цели}{42}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Топология сети}{43}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}План работы}{43}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Процедура конфигурирования}{43}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Вопросы.}{49}{subsection.3.3.5}%
+\contentsline {section}{\numberline {3.4}\textit {Лабораторная работа №3.4. Связь между VLAN}}{49}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Цели}{49}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Топология сети}{50}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}План работы}{50}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Процедура конфигурирования}{50}{subsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.4.5}Вопросы.}{53}{subsection.3.4.5}%
+\contentsline {chapter}{\chapternumberline {4}Лабораторная работа №4. Основы сетевой безопасности и доступа к сети.}{54}{chapter.4}%
+\contentsline {section}{\numberline {4.1}\textit {Лабораторная работа №4.1. Настройка ACL.}}{54}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Цели}{54}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Топология сети}{54}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}План работы}{55}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Процедура конфигурирования}{55}{subsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.1.5}Вопросы.}{59}{subsection.4.1.5}%
+\contentsline {section}{\numberline {4.2}\textit {Лабораторная работа №4.2. Настройка локального механизма AAA.}}{59}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Цели}{59}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Топология сети}{59}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}План работы}{60}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Процедура конфигурирования}{60}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}\textit {Лабораторная работа №4.3. Настройка NAT.}}{62}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Цели}{62}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Топология сети}{63}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}План работы}{63}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Процедура конфигурирования}{63}{subsection.4.3.4}%
+\contentsline {chapter}{\chapternumberline {5}Лабораторная работа №5. Конфигурирование основных сетевых служб.}{69}{chapter.5}%
+\contentsline {section}{\numberline {5.1}\textit {Лабораторная работа №5.1. Настройка FTP.}}{69}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Цели}{69}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Топология сети}{69}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}План работы}{69}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}Процедура конфигурирования}{69}{subsection.5.1.4}%
+\contentsline {section}{\numberline {5.2}\textit {Лабораторная работа №5.2. Конфигурирование DHCP.}}{72}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Цели}{72}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Топология сети}{72}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}План работы}{72}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Процедура конфигурирования}{72}{subsection.5.2.4}%

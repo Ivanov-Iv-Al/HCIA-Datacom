@@ -1,0 +1,181 @@
+\chapter{Лабораторная работа №5. Конфигурирование основных сетевых служб.}
+\label{ch:chapter 5}
+
+\section{\textit{Лабораторная работа №5.1. Настройка FTP.}}
+
+\subsection{Цели}
+
+Лабораторная работа помогает получить практические навыки по изучению
+следующих тем:
+
+\begin{itemize}
+
+\item Установление FTP-соединения
+
+\item Настройка параметров FTP-сервера
+
+\item Процедура передачи файлов на FTP-сервер
+
+\end{itemize}
+
+\subsection{Топология сети}
+
+Необходимо на R1 выполнить операции с конфигурационным файлом R2.
+R1 функционирует как FTP-клиент, а R2 — как FTP-сервер.
+
+\includegraphics[width=0.5\textwidth]{lb5_1.png} 
+\captionof{figure}{Топология сети для лабораторной работы №5.1}
+
+\subsection{План работы}
+
+\begin{itemize}
+
+\item 1. Настройка функции и параметров FTP-сервера.
+
+\item 2. Настройка локальных пользователей FTP.
+
+\item 3. Вход в систему FTP-сервера с FTP-клиента.
+
+\item 4. Выполнение операций с файлами в FTP-клиенте.
+
+\end{itemize}
+
+\subsection{Процедура конфигурирования}
+
+\textbf{Шаг 1.}Настроим основные параметры устройств.
+
+Настройте IP-адреса устройств:
+
+\includegraphics[width=0.5\textwidth]{lb5_2.png} 
+
+\includegraphics[width=0.5\textwidth]{lb5_3.png} 
+
+Сохраним конфигурационный файл для последующей проверки:
+
+\includegraphics[width=0.5\textwidth]{lb5_4.png} 
+
+\includegraphics[width=0.5\textwidth]{lb5_5.png} 
+
+Выведем на экран текущий список файлов:
+
+\includegraphics[width=0.5\textwidth]{lb5_6.png}
+
+\includegraphics[width=0.5\textwidth]{lb5_7.png}
+
+\textbf{Шаг 2.}Настроим функцию и параметры FTP-сервера на R2.
+
+\includegraphics[width=0.5\textwidth]{lb5_8.png}
+
+\textbf{Шаг 3.}Настроим локальных пользователей FTP.
+
+\includegraphics[width=0.5\textwidth]{lb5_9.png}
+
+\includegraphics[width=0.5\textwidth]{lb5_10.png}
+
+\textbf{Шаг 4.} Выполним вход в систему FTP-сервера с FTP-клиента.
+
+Выполним вход в FTP-клиент:
+
+\includegraphics[width=0.5\textwidth]{lb5_11.png}
+
+\textbf{Шаг 5.} Выполним файловые операции в файловой системе на R2.
+
+Настроим режим передачи:
+
+\includegraphics[width=0.5\textwidth]{lb5_12.png}
+
+Загрузим конфигурационный файл:
+
+\includegraphics[width=0.5\textwidth]{lb5_13.png}
+
+Удалим конфигурационный файл:
+
+\includegraphics[width=0.5\textwidth]{lb5_14.png}
+
+Выгрузим конфигурационный файл:
+
+\includegraphics[width=0.5\textwidth]{lb5_15.png}
+
+Закроем FTP-соединение:
+
+\includegraphics[width=0.5\textwidth]{lb5_16.png}
+
+\textbf{Вопросы.} 1. В активном или пассивном режиме работает FTP по умолчанию?
+
+-В активном.
+
+
+
+
+\section{\textit{Лабораторная работа №5.2. Конфигурирование DHCP.}}
+
+\subsection{Цели}
+
+Лабораторная работа помогает получить практические навыки по изучению
+следующих тем:
+
+\begin{itemize}
+
+\item Настройка пула адресов на DHCP-сервере
+
+\item Настройка глобального пула адресов на DHCP-сервере
+
+\item Использование DHCP для статического назначения IP-адресов
+
+\end{itemize}
+
+\subsection{Топология сети}
+
+Необходимо на R1 выполнить операции с конфигурационным файлом R2.
+R1 функционирует как FTP-клиент, а R2 — как FTP-сервер.
+
+\includegraphics[width=0.5\textwidth]{lb5_17.png} 
+\captionof{figure}{Топология сети для лабораторной работы №5.2}
+
+\subsection{План работы}
+
+\begin{itemize}
+
+\item 1. Настройка DHCP-сервера.
+
+\item 2. Настройка DHCP-клиентов.
+
+\end{itemize}
+
+\subsection{Процедура конфигурирования}
+
+\textbf{Шаг 1.} Настроим основные параметры.
+
+Настроим их на R2:
+
+\includegraphics[width=0.5\textwidth]{lb5_18.png} 
+
+\textbf{Шаг 2.} Включим функцию DHCP.
+
+\includegraphics[width=0.5\textwidth]{lb5_19.png} 
+
+\includegraphics[width=0.5\textwidth]{lb5_20.png} 
+
+\includegraphics[width=0.5\textwidth]{lb5_21.png} 
+
+\textbf{Шаг 3.} Настройте пул адресов.
+
+\includegraphics[width=0.5\textwidth]{lb5_22.png} 
+
+\textbf{Шаг 4.} Включим функцию DHCP-сервера на GE0/0/3 R2 для назначения IP-адреса R3.
+
+\includegraphics[width=0.5\textwidth]{lb5_23.png} 
+
+\textbf{Шаг 5.} Настроим DHCP-клиенты.
+
+\includegraphics[width=0.5\textwidth]{lb5_24.png} 
+
+\includegraphics[width=0.5\textwidth]{lb5_25.png} 
+
+Проверим настройку:
+
+\includegraphics[width=0.5\textwidth]{lb5_26.png} 
+
+\includegraphics[width=0.5\textwidth]{lb5_27.png} 
+
+\includegraphics[width=0.5\textwidth]{lb5_28.png} 
