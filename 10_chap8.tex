@@ -1,0 +1,248 @@
+\chapter{Лабораторная работа №8. Основы сетевого программирования и автоматизации.}
+\label{ch:chapter 8}
+
+\section{Цели}
+
+Лабораторная работа помогает получить практические навыки по изучению
+следующих тем:
+
+\begin{itemize}
+
+\item Изучение базового синтаксиса языка Python
+
+\item Использование библиотеки telnetlib для автоматизации задач
+
+\end{itemize}
+
+\section{Топология сети}
+
+У компании есть коммутатор с IP-адресом управления 192.168.56.101/24.
+Необходимо написать сценарий автоматизации для просмотра текущего
+конфигурационного файла устройства.
+
+\includegraphics{lb8_1}
+
+\section{План работы}
+
+\begin{itemize}
+
+\item 1. Настройка параметров Telnet: установка пароля Telnet, включение Telnet и настройка разрешения на доступ через Telnet.
+
+\item 2. Компиляция сценария Python: вызов модуля telnetlib для входа в устройство и проверка конфигурации.
+
+\end{itemize}
+
+\section{Процедура конфигурирования}
+
+\textbf{Шаг 1.} Настройка Telnet на коммутаторе.
+
+Войдем в системный режим и зададим пароль для входа Telnet:
+
+\begin{verbatim}
+<Huawei> system-view
+[Huawei] user-interface vty 0 4
+[Huawei-ui-vty0-4] authentication-mode password
+[Huawei-ui-vty0-4] set authentication password simple Huawei@123
+[Huawei-ui-vty0-4] protocol inbound telnet
+[Huawei-ui-vty0-4] user privilege level 15
+[Huawei-ui-vty0-4] quit
+\end{verbatim}
+
+\textbf{Шаг 2.} Включение службы Telnet.
+
+Включим службу Telnet, чтобы разрешить удаленный доступ:
+
+\begin{verbatim}
+[Huawei] telnet server enable
+Info: The Telnet server has been enabled.
+[Huawei] quit
+\end{verbatim}
+
+\textbf{Шаг 3.} Проверка доступа через Telnet с ПК.
+
+Выполним вход с ПК в коммутатор через Telnet с помощью командной строки:
+
+\begin{verbatim}
+C:\Users\Student> telnet 192.168.56.101
+Login authentication
+
+Password: 
+Info: The max number of VTY users is 5, and the number of current VTY 
+users on line is 1. The current login time is 2024-01-15 21:12:57.
+<Huawei>
+\end{verbatim}
+
+Как видно, функции Telnet сконфигурированы корректно.
+
+\textbf{Шаг 4.} Написание кода на языке Python.
+
+Создадим сценарий, который вызывает модуль telnetlib для входа в коммутатор,
+выполняет команду \textbf{display current-configuration} и выводит результаты на экран:
+
+\begin{lstlisting}[language=Python, caption=Скрипт автоматизации на Python]
+import telnetlib
+import time
+
+host = '192.168.56.101'
+password = 'Huawei@123'
+
+tn = telnetlib.Telnet(host)
+
+tn.read_until(b"Password:")
+tn.write(password.encode('ascii') + b"\n")
+tn.write(b'display cu \n')
+time.sleep(2)
+
+print(tn.read_very_eager().decode('ascii'))
+tn.close()
+\end{lstlisting}
+
+\textbf{Шаг 5.} Запуск компилятора.
+
+В данной лабораторной среде используется компилятор Jupyter Notebook.
+Запустим написанный скрипт.
+
+\textbf{Шаг 6.} Интерпретация кода.
+
+Сначала импортируем необходимые модули:
+
+\begin{verbatim}
+import telnetlib   # Модуль для работы с Telnet
+import time        # Модуль для работы с задержками
+\end{verbatim}
+
+Затем выполняется вход в устройство. Функция \texttt{read\_until(b"Password:")} ожидает приглашения к вводу пароля.
+Функция \texttt{write()} отправляет пароль и команду \texttt{display cu}.
+Метод \texttt{read\_very\_eager()} считывает вывод команды, который отображается на консоли.
+В конце сеанс закрывается командой \texttt{close()}.
+
+\textbf{Шаг 7.} Вывод командной строки.
+
+В результате выполнения скрипта мы видим вывод конфигурации устройства:
+
+\begin{verbatim}
+Info: The max number of VTY users is 5, and the number 
+ of current VTY users on line is 2. 
+ The current login time is 2024-01-15 20:19:11.
+<Huawei>display cu
+#
+sysname Huawei
+#
+cluster enable
+ntdp enable
+ndp enable
+#
+drop illegal-mac alarm
+#
+diffserv domain default
+#
+drop-profile default
+# 
+aaa
+ authentication-scheme default
+ authorization-scheme default
+ accounting-scheme default
+ domain default
+ domain default_admin
+ local-user admin password simple admin
+ local-user admin service-type http
+#
+interface Vlanif1
+ ip address 192.168.56.101 255.255.255.0
+#
+--- More ---
+\end{verbatim}
+
+\section{Вопросы}
+
+\textbf{1. Как с помощью telnetlib настроить параметры устройства, например, IP-адрес интерфейса управления устройством?}
+
+\textbf{Ответ:}
+
+Для настройки параметров устройства (например, IP-адреса интерфейса) с помощью telnetlib необходимо выполнить следующие шаги:
+
+\begin{enumerate}
+    \item Установить соединение с устройством через telnetlib.
+    \item Войти в систему, передав имя пользователя и пароль (или только пароль, если аутентификация настроена соответствующим образом).
+    \item Перейти в системный режим командой \texttt{system-view}.
+    \item Войти в режим конфигурирования интерфейса командой \texttt{interface} (например, \texttt{interface Vlanif1}).
+    \item Выполнить команду настройки IP-адреса, например \texttt{ip address 192.168.1.1 24}.
+    \item Сохранить конфигурацию командой \texttt{save}.
+\end{enumerate}
+
+Пример кода для настройки IP-адреса:
+
+\begin{lstlisting}[language=Python]
+import telnetlib
+import time
+
+host = '192.168.56.101'
+password = 'Huawei@123'
+
+tn = telnetlib.Telnet(host)
+
+# Вход в систему
+tn.read_until(b"Password:")
+tn.write(password.encode('ascii') + b"\n")
+time.sleep(1)
+
+# Переход в системный режим и настройка IP-адреса
+tn.write(b"system-view \n")
+time.sleep(1)
+tn.write(b"interface Vlanif1 \n")
+time.sleep(1)
+tn.write(b"ip address 192.168.1.1 24 \n")
+time.sleep(1)
+tn.write(b"quit \n")
+time.sleep(1)
+tn.write(b"return \n")
+time.sleep(1)
+
+# Сохранение конфигурации
+tn.write(b"save \n")
+time.sleep(1)
+tn.write(b"y \n")
+time.sleep(3)
+
+tn.close()
+\end{lstlisting}
+
+\textbf{2. Как сохранить файл конфигурации в локальный каталог?}
+
+\textbf{Ответ:}
+
+Для сохранения файла конфигурации в локальный каталог можно использовать следующий подход:
+
+\begin{enumerate}
+    \item Подключиться к устройству через telnetlib и выполнить команду \texttt{display current-configuration} (или \texttt{display cu}).
+    \item Считать вывод команды с помощью метода \texttt{read\_very\_eager()} или \texttt{read\_until()}.
+    \item Записать полученные данные в локальный файл с помощью стандартных средств Python (функция \texttt{open()}).
+\end{enumerate}
+
+Пример кода для сохранения конфигурации:
+
+\begin{lstlisting}[language=Python]
+import telnetlib
+import time
+
+host = '192.168.56.101'
+password = 'Huawei@123'
+
+tn = telnetlib.Telnet(host)
+
+tn.read_until(b"Password:")
+tn.write(password.encode('ascii') + b"\n")
+time.sleep(1)
+
+tn.write(b"display current-configuration \n")
+time.sleep(3)
+
+config = tn.read_very_eager().decode('ascii')
+tn.close()
+
+# Сохранение конфигурации в локальный файл
+with open('router_config.txt', 'w') as f:
+    f.write(config)
+    
+print("Конфигурация сохранена в файл router_config.txt")
+\end{lstlisting}

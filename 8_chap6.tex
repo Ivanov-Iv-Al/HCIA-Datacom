@@ -1,0 +1,250 @@
+\chapter{Лабораторная работа №6. Создание WLAN.}
+\label{ch:chapter 6}
+
+\section{Цели}
+
+Лабораторная работа помогает получить практические навыки по изучению
+следующих тем:
+
+\begin{itemize}
+
+\item Процедура аутентификации точек доступа
+
+\item Процедура настройки профилей WLAN
+
+\item Процесс настройки основных параметров WLAN
+
+\end{itemize}
+
+\section{Топология сети}
+
+\includegraphics[width=0.5\textwidth]{lb6_1.png} 
+\captionof{figure}{Топология сети для лабораторной работы №6}
+
+\section{План работы}
+
+\begin{itemize}
+
+\item 1. Настройка подключения к проводной сети.
+
+\item 2. Настройка точек доступа и перевод их в режим онлайн.
+
+(1) Создание групп точек доступа и добавление точек доступа с одинаковой конфигурацией в одну группу для унифицированной настройки
+
+(2) Настройка системных параметров контроллера доступа, включая код страны и интерфейс-источник, используемый контроллером для связи с точками доступа.
+
+(3) Настройка режима аутентификации AP и импорт AP для выхода точек доступа в сеть.
+
+\item 3. Настройка параметров сервисов WLAN и передача конфигурации точкам доступа, чтобы обеспечить доступ STA к WLAN.
+
+\end{itemize}
+
+\section{Процедура конфигурирования}
+
+К сожалению, ни один из AP, представленных в виртуальном окружении не работает, а потому невозможно выполнить настройку WLAN, поэтому далее будет представлена настройка Switch.
+
+\textbf{Шаг 1.} Настроим основные параметры устройства.
+
+Отключим ненужные порты между S1 и AC:
+
+\includegraphics[width=0.5\textwidth]{lb6_2.png} 
+
+Включим функцию PoE (Power over Ethernet) на портах S3 и S4, подключенных к AP:
+
+\includegraphics[width=0.5\textwidth]{lb6_3.png} 
+
+\textbf{Шаг 2.} Настроим параметры проводной сети.
+
+Настроим VLAN:
+
+\includegraphics[width=0.5\textwidth]{lb6_4.png} 
+
+\includegraphics[width=0.5\textwidth]{lb6_5.png} 
+
+\includegraphics[width=0.5\textwidth]{lb6_6.png} 
+
+\includegraphics[width=0.5\textwidth]{lb6_7.png} 
+
+Настроим IP-адреса интерфейсов:
+
+\includegraphics[width=0.5\textwidth]{lb6_8.png} 
+
+Настроим DHCP:
+
+\includegraphics[width=0.5\textwidth]{lb6_9.png} 
+
+\textbf{Шаг 3.} Настроим параметры точек доступа для выхода в сеть.
+
+В силу вышеописанной проблемы с AP, я просто опишу, как именно настроить параметры точек доступа.
+
+Создадим группу AP и назовем ее ap-group1.
+
+\texttt{[AC]wlan}
+
+\texttt{[AC-wlan-view]ap-group name ap-group1}
+
+\texttt{[AC-wlan-ap-group-ap-group1]quit}
+
+Создадим профиль регулирующего домена и настроим код страны AC в профиле.
+
+\texttt{[AC]wlan}
+
+\texttt{[AC-wlan-view]regulatory-domain-profile name default}
+
+\texttt{[AC-wlan-regulate-domain-default]country-code cn}
+
+\texttt{[AC-wlan-regulate-domain-default]quit}
+
+Установим привязку профиля регулирующего домена к группе AP.
+
+\texttt{[AC]wlan}
+
+\texttt{[AC-wlan-view]ap-group name ap-group1}
+
+\texttt{[AC-wlan-ap-group-ap-group1]regulatory-domain-profile default}
+
+\texttt{[AC-wlan-ap-group-ap-group1]quit}
+
+Укажем интерфейс-источник на AC для установления туннелей CAPWAP.
+
+\texttt{[AC]capwap source interface Vlanif 100}
+
+Импортируем точки доступа в AC и добавим их в группу AP с именем ap-group1.
+
+\texttt{[AC]wlan}
+
+\texttt{[AC-wlan-view]ap auth-mode mac-auth}
+
+\texttt{[AC-wlan-view]ap-id 0 ap-mac 60F1-8A9C-2B40}
+
+\texttt{[AC-wlan-ap-0]ap-name ap1}
+
+\texttt{[AC-wlan-ap-0]ap-group ap-group1}
+
+\texttt{[AC-wlan-ap-0]quit}
+
+\texttt{[AC-wlan-view]ap-id 1 ap-mac B4FB-F8B7-DE40}
+
+\texttt{[AC-wlan-ap-1]ap-name ap2}
+
+\texttt{[AC-wlan-ap-1]ap-group ap-group1}
+
+\texttt{[AC-wlan-ap-1]quit}
+
+\textbf{Шаг 4.} Настроим параметры сервисов WLAN.
+
+Создадим профиль безопасности HCIA-WLAN и настроим политику безопасности.
+
+\texttt{[AC-wlan-view]security-profile name HCIA-WLAN}
+
+\texttt{[AC-wlan-sec-prof-HCIA-WLAN]security wpa-wpa2 psk pass-phrase HCIA-Datacom aes}
+
+\texttt{[AC-wlan-sec-prof-HCIA-WLAN]quit}
+
+Создадим профиль SSID HCIA-WLAN и зададим имя SSID HCIA-WLAN.
+
+\texttt{[AC]wlan}
+
+\texttt{[AC-wlan-view]ssid-profile name HCIA-WLAN}
+
+\texttt{[AC-wlan-ssid-prof-HCIA-WLAN]ssid HCIA-WLAN}
+
+\texttt{[AC-wlan-ssid-prof-HCIA-WLAN]quit}
+
+Создадим профиль VAP HCIA-WLAN, настроим режим передачи данных и сервисную VLAN и применим профиль безопасности и профиль SSID к профилю VAP.
+
+\texttt{[AC]wlan}
+
+\texttt{[AC-wlan-view]vap-profile name HCIA-WLAN}
+
+\texttt{[AC-wlan-vap-prof-HCIA-WLAN]forward-mode direct-forward}
+
+\texttt{[AC-wlan-vap-prof-HCIA-WLAN]service-vlan vlan-id 101}
+
+\texttt{[AC-wlan-vap-prof-HCIA-WLAN]security-profile HCIA-WLAN}
+
+\texttt{[AC-wlan-vap-prof-HCIA-WLAN]ssid-profile HCIA-WLAN}
+
+\texttt{[AC-wlan-vap-prof-HCIA-WLAN]quit}
+
+Установим привязку профиля VAP к группе AP и применим конфигурацию профиля VAP HCIA-WLAN к радиомодулю 0 и радиомодулю 1 точек доступа в группе AP.
+
+\texttt{[AC]wlan}
+
+\texttt{[AC-wlan-view]ap-group name ap-group1}
+
+\texttt{[AC-wlan-ap-group-ap-group1]vap-profile HCIA-WLAN wlan 1 radio all}
+
+\texttt{[AC-wlan-ap-group-ap-group1]quit}
+
+\section*{Вопросы по лабораторной работе WLAN}
+
+\subsection*{Вопрос 1}
+\textbf{Какое влияние на доступ STA к S1 в текущей сети будут оказывать настройки порта GigabitEthernet0/0/10 контроллера доступа, запрещающие прохождение пакетов из VLAN 101? Почему? Что изменится, если будет использоваться туннельная передача?}
+
+\textbf{Ответ:}
+
+При использовании \textbf{прямой передачи (direct-forward)} настройки порта GigabitEthernet0/0/10 контроллера доступа, запрещающие прохождение пакетов из VLAN 101, \textbf{не будут оказывать никакого влияния} на доступ STA к S1.
+
+\textbf{Почему:} 
+При прямой передаче данных пользовательский трафик от STA (станций) не проходит через контроллер доступа (AC). Трафик передается от точки доступа (AP) напрямую на коммутатор S3/S4, затем на S1, минуя AC. AC участвует только в управлении AP и не обрабатывает пользовательские данные. Следовательно, запрет на порту AC не влияет на прохождение пользовательского трафика.
+
+\textbf{Что изменится при туннельной передаче:}
+При использовании туннельной передачи (туннелирование CAPWAP) пользовательский трафик инкапсулируется в туннель CAPWAP и передается от AP к AC, а затем AC декапсулирует его и отправляет в проводную сеть. В этом случае, если порт AC запрещает прохождение пакетов из VLAN 101, то STA \textbf{не смогут получить доступ к S1}, так как трафик будет блокироваться на порту контроллера доступа.
+
+\subsection*{Вопрос 2}
+\textbf{Какие операции необходимо выполнить на AC, чтобы назначить STA, подключенные к AP1 и AP2, к разным VLAN?}
+
+\textbf{Ответ:}
+
+Для назначения STA, подключенных к разным точкам доступа (AP1 и AP2), в разные VLAN, необходимо выполнить следующие операции на контроллере доступа (AC):
+
+\begin{enumerate}
+\item \textbf{Создать разные профили VAP (Virtual Access Point) для разных AP.}
+    
+    \texttt{[AC-wlan-view]vap-profile name WLAN-AP1}
+
+    \texttt{[AC-wlan-vap-prof-WLAN-AP1]service-vlan vlan-id 101}
+    
+    \texttt{[AC-wlan-vap-prof-WLAN-AP1]quit}
+    
+    \texttt{[AC-wlan-view]vap-profile name WLAN-AP2}
+
+    \texttt{[AC-wlan-vap-prof-WLAN-AP2]service-vlan vlan-id 102}
+
+    \texttt{[AC-wlan-vap-prof-WLAN-AP2]quit}
+
+\item \textbf{Создать разные группы AP (или использовать существующие группы).}
+    
+    \texttt{[AC-wlan-view]ap-group name group-AP1}
+
+    \texttt{[AC-wlan-view]ap-group name group-AP2}
+
+\item \textbf{Привязать соответствующие профили VAP к радиомодулям каждой группы AP.}
+    
+    \texttt{[AC-wlan-view]ap-group name group-AP1}
+
+    \texttt{[AC-wlan-ap-group-group-AP1]vap-profile WLAN-AP1 wlan 1 radio all}
+
+    \texttt{[AC-wlan-ap-group-group-AP1]quit}
+    
+    \texttt{[AC-wlan-view]ap-group name group-AP2}
+
+    \texttt{[AC-wlan-ap-group-group-AP2]vap-profile WLAN-AP2 wlan 1 radio all}
+
+    \texttt{[AC-wlan-ap-group-group-AP2]quit}
+
+\item \textbf{Назначить каждую точку доступа в соответствующую группу AP.}
+    
+    \texttt{[AC-wlan-view]ap-id 0}
+
+    \texttt{[AC-wlan-ap-0]ap-group group-AP1}
+
+    \texttt{[AC-wlan-ap-0]quit}
+    
+    \texttt{[AC-wlan-view]ap-id 1}
+
+    \texttt{[AC-wlan-ap-1]ap-group group-AP2}
+
+    \texttt{[AC-wlan-ap-1]quit}
+\end{enumerate}
